@@ -6,6 +6,7 @@ import com.movie_review_platform.entity.Role;
 import com.movie_review_platform.entity.YasminUser;
 import com.movie_review_platform.repository.YasminUserRepository;
 import com.movie_review_platform.security.YasminJwtUtil;
+import com.movie_review_platform.service.YasminAsyncService;
 import com.movie_review_platform.service.YasminAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +22,7 @@ public class YasminAuthServiceImpl implements YasminAuthService {
     private final PasswordEncoder passwordEncoder;
     private final YasminJwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
+    private final YasminAsyncService asyncService;
 
     @Override
     public String register(YasminRegisterRequest request) {
@@ -35,6 +37,8 @@ public class YasminAuthServiceImpl implements YasminAuthService {
                 .role(Role.ROLE_USER)
                 .build();
         userRepository.save(user);
+        asyncService.sendWelcomeEmail(user.getEmail(), user.getFirstName());
+        asyncService.logUserActivity(user.getEmail(), "USER_REGISTERED");
         return jwtUtil.generateToken(user.getEmail());
     }
 
