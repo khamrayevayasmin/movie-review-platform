@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class YasminReviewServiceImpl implements KhamrayevaYasminReviewService {
+public class KhamrayevaYasminReviewServiceImpl implements KhamrayevaYasminReviewService {
 
     private final KhamrayevaYasminReviewRepository reviewRepository;
     private final KhamrayevaYasminMovieRepository movieRepository;

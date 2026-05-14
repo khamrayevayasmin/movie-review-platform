@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class YasminActorServiceImpl implements KhamrayevaYasminActorService {
+public class KhamrayevaYasminActorServiceImpl implements KhamrayevaYasminActorService {
 
     private final KhamrayevaYasminActorRepository actorRepository;
     private final KhamrayevaYasminActorMapper actorMapper;

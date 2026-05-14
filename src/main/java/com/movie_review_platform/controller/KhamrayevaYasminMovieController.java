@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,7 +32,9 @@ public class KhamrayevaYasminMovieController {
     public ResponseEntity<Page<KhamrayevaYasminMovieDto>> getAllMovies(
             @RequestParam(required = false) String search,
             @RequestParam(required = false) String genre,
-            Pageable pageable) {
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(movieService.getAllMovies(search, genre, pageable));
     }
 

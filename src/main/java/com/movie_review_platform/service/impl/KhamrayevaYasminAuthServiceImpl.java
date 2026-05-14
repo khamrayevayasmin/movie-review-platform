@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class YasminAuthServiceImpl implements KhamrayevaYasminAuthService {
+public class KhamrayevaYasminAuthServiceImpl implements KhamrayevaYasminAuthService {
 
     private final KhamrayevaYasminUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;

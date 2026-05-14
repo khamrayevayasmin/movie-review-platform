@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class YasminGenreServiceImpl implements KhamrayevaYasminGenreService {
+public class KhamrayevaYasminGenreServiceImpl implements KhamrayevaYasminGenreService {
 
     private final KhamrayevaYasminGenreRepository genreRepository;
     private final KhamrayevaYasminGenreMapper genreMapper;

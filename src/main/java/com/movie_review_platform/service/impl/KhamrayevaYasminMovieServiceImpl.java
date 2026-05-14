@@ -12,10 +12,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class YasminMovieServiceImpl implements KhamrayevaYasminMovieService {
+public class KhamrayevaYasminMovieServiceImpl implements KhamrayevaYasminMovieService {
 
     private final KhamrayevaYasminMovieRepository movieRepository;
     private final KhamrayevaYasminGenreRepository genreRepository;
@@ -38,6 +39,7 @@ public class YasminMovieServiceImpl implements KhamrayevaYasminMovieService {
     }
 
     @Override
+    @Transactional
     public KhamrayevaYasminMovieDto getMovieById(Long id) {
         return movieRepository.findById(id)
                 .map(movieMapper::toDto)
@@ -45,6 +47,7 @@ public class YasminMovieServiceImpl implements KhamrayevaYasminMovieService {
     }
 
     @Override
+    @Transactional
     public Page<KhamrayevaYasminMovieDto> getAllMovies(String search, String genre, Pageable pageable) {
         if (search != null && !search.isEmpty()) {
             return movieRepository
