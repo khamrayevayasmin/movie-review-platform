@@ -1,13 +1,13 @@
 package com.movie_review_platform.service.impl;
 
-import com.movie_review_platform.dto.YasminReviewDto;
-import com.movie_review_platform.dto.YasminReviewRequest;
-import com.movie_review_platform.entity.YasminReview;
-import com.movie_review_platform.mapper.YasminReviewMapper;
-import com.movie_review_platform.repository.YasminMovieRepository;
-import com.movie_review_platform.repository.YasminReviewRepository;
-import com.movie_review_platform.repository.YasminUserRepository;
-import com.movie_review_platform.service.YasminReviewService;
+import com.movie_review_platform.dto.KhamrayevaYasminReviewDto;
+import com.movie_review_platform.dto.KhamrayevaYasminReviewRequest;
+import com.movie_review_platform.entity.KhamrayevaYasminReview;
+import com.movie_review_platform.mapper.KhamrayevaYasminReviewMapper;
+import com.movie_review_platform.repository.KhamrayevaYasminMovieRepository;
+import com.movie_review_platform.repository.KhamrayevaYasminReviewRepository;
+import com.movie_review_platform.repository.KhamrayevaYasminUserRepository;
+import com.movie_review_platform.service.KhamrayevaYasminReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -15,16 +15,16 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class YasminReviewServiceImpl implements YasminReviewService {
+public class YasminReviewServiceImpl implements KhamrayevaYasminReviewService {
 
-    private final YasminReviewRepository reviewRepository;
-    private final YasminMovieRepository movieRepository;
-    private final YasminUserRepository userRepository;
-    private final YasminReviewMapper reviewMapper;
+    private final KhamrayevaYasminReviewRepository reviewRepository;
+    private final KhamrayevaYasminMovieRepository movieRepository;
+    private final KhamrayevaYasminUserRepository userRepository;
+    private final KhamrayevaYasminReviewMapper reviewMapper;
 
     @Override
-    public YasminReviewDto createReview(YasminReviewRequest request, String email) {
-        YasminReview review = YasminReview.builder()
+    public KhamrayevaYasminReviewDto createReview(KhamrayevaYasminReviewRequest request, String email) {
+        KhamrayevaYasminReview review = KhamrayevaYasminReview.builder()
                 .rating(request.getRating())
                 .content(request.getContent())
                 .movie(movieRepository.findById(request.getMovieId())
@@ -36,7 +36,7 @@ public class YasminReviewServiceImpl implements YasminReviewService {
     }
 
     @Override
-    public List<YasminReviewDto> getReviewsByMovie(Long movieId) {
+    public List<KhamrayevaYasminReviewDto> getReviewsByMovie(Long movieId) {
         return reviewRepository.findByMovieId(movieId)
                 .stream()
                 .map(reviewMapper::toDto)
@@ -44,7 +44,7 @@ public class YasminReviewServiceImpl implements YasminReviewService {
     }
 
     @Override
-    public List<YasminReviewDto> getReviewsByUser(Long userId) {
+    public List<KhamrayevaYasminReviewDto> getReviewsByUser(Long userId) {
         return reviewRepository.findByUserId(userId)
                 .stream()
                 .map(reviewMapper::toDto)

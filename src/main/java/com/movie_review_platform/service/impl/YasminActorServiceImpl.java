@@ -1,10 +1,10 @@
 package com.movie_review_platform.service.impl;
 
-import com.movie_review_platform.dto.YasminActorDto;
-import com.movie_review_platform.entity.YasminActor;
-import com.movie_review_platform.mapper.YasminActorMapper;
-import com.movie_review_platform.repository.YasminActorRepository;
-import com.movie_review_platform.service.YasminActorService;
+import com.movie_review_platform.dto.KhamrayevaYasminActorDto;
+import com.movie_review_platform.entity.KhamrayevaYasminActor;
+import com.movie_review_platform.mapper.KhamrayevaYasminActorMapper;
+import com.movie_review_platform.repository.KhamrayevaYasminActorRepository;
+import com.movie_review_platform.service.KhamrayevaYasminActorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class YasminActorServiceImpl implements YasminActorService {
+public class YasminActorServiceImpl implements KhamrayevaYasminActorService {
 
-    private final YasminActorRepository actorRepository;
-    private final YasminActorMapper actorMapper;
+    private final KhamrayevaYasminActorRepository actorRepository;
+    private final KhamrayevaYasminActorMapper actorMapper;
 
     @Override
-    public YasminActorDto createActor(YasminActorDto dto) {
-        YasminActor actor = YasminActor.builder()
+    public KhamrayevaYasminActorDto createActor(KhamrayevaYasminActorDto dto) {
+        KhamrayevaYasminActor actor = KhamrayevaYasminActor.builder()
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName())
                 .bio(dto.getBio())
@@ -29,14 +29,14 @@ public class YasminActorServiceImpl implements YasminActorService {
     }
 
     @Override
-    public YasminActorDto getActorById(Long id) {
+    public KhamrayevaYasminActorDto getActorById(Long id) {
         return actorRepository.findById(id)
                 .map(actorMapper::toDto)
                 .orElseThrow(() -> new RuntimeException("Actor not found"));
     }
 
     @Override
-    public Page<YasminActorDto> getAllActors(String search, Pageable pageable) {
+    public Page<KhamrayevaYasminActorDto> getAllActors(String search, Pageable pageable) {
         if (search != null && !search.isEmpty()) {
             return actorRepository
                     .findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(
@@ -47,8 +47,8 @@ public class YasminActorServiceImpl implements YasminActorService {
     }
 
     @Override
-    public YasminActorDto updateActor(Long id, YasminActorDto dto) {
-        YasminActor actor = actorRepository.findById(id)
+    public KhamrayevaYasminActorDto updateActor(Long id, KhamrayevaYasminActorDto dto) {
+        KhamrayevaYasminActor actor = actorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Actor not found"));
         actor.setFirstName(dto.getFirstName());
         actor.setLastName(dto.getLastName());

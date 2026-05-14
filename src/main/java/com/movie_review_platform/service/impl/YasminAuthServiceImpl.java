@@ -1,13 +1,13 @@
 package com.movie_review_platform.service.impl;
 
-import com.movie_review_platform.dto.YasminLoginRequest;
-import com.movie_review_platform.dto.YasminRegisterRequest;
+import com.movie_review_platform.dto.KhamrayevaYasminLoginRequest;
+import com.movie_review_platform.dto.KhamrayevaYasminRegisterRequest;
 import com.movie_review_platform.entity.Role;
-import com.movie_review_platform.entity.YasminUser;
-import com.movie_review_platform.repository.YasminUserRepository;
-import com.movie_review_platform.security.YasminJwtUtil;
-import com.movie_review_platform.service.YasminAsyncService;
-import com.movie_review_platform.service.YasminAuthService;
+import com.movie_review_platform.entity.KhamrayevaYasminUser;
+import com.movie_review_platform.repository.KhamrayevaYasminUserRepository;
+import com.movie_review_platform.security.KhamrayevaYasminJwtUtil;
+import com.movie_review_platform.service.KhamrayevaYasminAsyncService;
+import com.movie_review_platform.service.KhamrayevaYasminAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,20 +16,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class YasminAuthServiceImpl implements YasminAuthService {
+public class YasminAuthServiceImpl implements KhamrayevaYasminAuthService {
 
-    private final YasminUserRepository userRepository;
+    private final KhamrayevaYasminUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final YasminJwtUtil jwtUtil;
+    private final KhamrayevaYasminJwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
-    private final YasminAsyncService asyncService;
+    private final KhamrayevaYasminAsyncService asyncService;
 
     @Override
-    public String register(YasminRegisterRequest request) {
+    public String register(KhamrayevaYasminRegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
-        YasminUser user = YasminUser.builder()
+        KhamrayevaYasminUser user = KhamrayevaYasminUser.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
@@ -43,7 +43,7 @@ public class YasminAuthServiceImpl implements YasminAuthService {
     }
 
     @Override
-    public String login(YasminLoginRequest request) {
+    public String login(KhamrayevaYasminLoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
